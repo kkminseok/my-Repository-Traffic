@@ -7,6 +7,6 @@ def get_all_repositories(token: string):
     repos = g.get_repos(20,"public")
     print(repos)
     for repo in repos:
-        print(repo.full_name)
+        print(repo)
         contents = repo.get_top_paths()
         print(contents)
