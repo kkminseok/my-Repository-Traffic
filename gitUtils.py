@@ -4,7 +4,7 @@ from github import Github
 
 def get_all_repositories(token: string):
     g = Github(token)
-    repos = g.get_repos("2010-11-28","public")
+    repos = g.get_user().get_repos("all")
     print(repos)
     for repo in repos:
         print(repo)
