@@ -8,6 +8,6 @@ def get_all_repositories(token: string):
     print(repos)
     for repo in repos:
         print(repo)
-        g.get_repo(repo.name)
+        g.get_repo(repo)
         contents = repo.get_top_paths()
         print(contents)
