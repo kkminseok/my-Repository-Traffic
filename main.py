@@ -1,8 +1,8 @@
 import os
 
-import gitUtils
+from gitUtils import get_all_repositories
 
 if __name__ == "__main__":
     token = os.environ['MY_TRAFFIC_TOKEN']
 
-    print(gitUtils.get_all_repositories(token))
+    print(get_all_repositories(token))
