@@ -4,6 +4,9 @@ from github import Github
 
 def get_all_repositories(token: string):
     g = Github(token)
-    repo = g.get_repo("PyGithub/PyGithub")
-    contents = repo.get_top_paths()
-    print(contents)
+    repos = g.get_repos(20,"all")
+    for repo in repos:
+        print(repo)
+        g.get_repo(repo.name)
+        contents = repo.get_top_paths()
+        print(contents)
