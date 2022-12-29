@@ -11,7 +11,7 @@
 
 이 데이터들을 통해 내 레포지토리중에 가장 인기가 많은건 뭔지 확인할 수 있고, 트렌드도 확인할 수 있을거라 생각한다.
 
-이는 **Issues**탭에 들어가서 확인할 수 있다.
+이는 [Issue](https://github.com/kkminseok/my-Repository-Traffic/issues)탭에 들어가서 확인할 수 있다.
 
 
 
