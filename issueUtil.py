@@ -1,7 +1,4 @@
-import string
-
-
-def create_issue_content(cloner_data: dict, view_data: dict, last_issue_body: string) -> string:
+def create_issue_content(cloner_data: list, view_data: list, last_issue_body: str) -> str:
     # 문자열 그냥 합치면 효율성이 떨이짐.
     github_url = 'https://github.com/'
     issue_list = list()
@@ -32,7 +29,9 @@ def create_issue_content(cloner_data: dict, view_data: dict, last_issue_body: st
     return ''.join(issue_list)
 
 
-def compare_prev_issue(current_cloner: list, current_view: list, last_issue: string) -> list:
+def compare_prev_issue(current_cloner: list, current_view: list, last_issue: str) -> list:
+    print(current_cloner)
+    print(current_view)
     print(last_issue)
     return []
 
