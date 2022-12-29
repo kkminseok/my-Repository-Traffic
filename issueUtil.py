@@ -34,4 +34,5 @@ def create_issue_content(cloner_data: dict, view_data: dict, last_issue_body: st
 
 def compare_prev_issue(current_cloner: list, current_view: list, last_issue: string) -> list:
     print(last_issue)
+    return []
 
