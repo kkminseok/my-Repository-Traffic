@@ -30,6 +30,9 @@ jobs:
     - name: Install dependencies
       run: |
         poetry install
+    - name: show poetry list
+      run: |
+        poetry show
     - name: run Python 
       run: |
         python main.py
