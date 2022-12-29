@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["minseokkang <aaaa727@khu.ac.kr>"]
 readme = "README.md"
-packages = [{include = "my_repository_traffic"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
