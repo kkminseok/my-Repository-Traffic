@@ -6,7 +6,7 @@ def create_issue_content(cloner_data: dict, view_data: dict, last_issue_body: st
     github_url = 'https://github.com/'
     issue_list = list()
     # 이전 이슈와 비교
-    traffic_prev_list, view_prev_list = compare_prev_issue(cloner_data, view_data, last_issue_body)
+    compare_prev_issue(cloner_data, view_data, last_issue_body)
 
     issue_cloner_header = '## Unique Cloner <br/> \n'
     issue_viewer_header = '## Unique viewer <br/> \n'
