@@ -1,13 +1,11 @@
 import os
 from datetime import datetime
 
-import pytz
 from pytz import timezone
 from gitUtils import *
 from issueUtil import create_issue_content
 
 if __name__ == "__main__":
-    print(pytz.VERSION)
     today = datetime.now(timezone('Asia/Seoul'))
     today_date = today.strftime("%Y년 %m월 %d일")
     issue_title = f"오늘자 트래픽 변화({today_date})"
