@@ -9,15 +9,15 @@ def get_all_repositories(token: string) -> github.PaginatedList.PaginatedList:
     return g.get_user().get_repos("public", "owner")
 
 
-def get_all_repositories_traffic(repos: github.PaginatedList.PaginatedList) -> dict:
-    traffic_dict = {}
+def get_all_repositories_cloner(repos: github.PaginatedList.PaginatedList) -> dict:
+    cloner_dict = {}
     for repo in repos:
         contents = repo.get_clones_traffic()
         unique_cloner = contents['uniques']
         if unique_cloner == 0:
             continue
-        traffic_dict[repo.full_name] = unique_cloner
-    return traffic_dict
+        cloner_dict[repo.full_name] = unique_cloner
+    return cloner_dict
 
 
 def get_all_repositories_visitor(repos: github.PaginatedList.PaginatedList) -> dict:
@@ -36,5 +36,13 @@ def get_repository(repository_name: string, token: string) -> github.PaginatedLi
     return g.get_user().get_repo(repository_name)
 
 
-def create_issue(repo: github.Repository.Repository, title: string, content: string):
+def get_repository_issue_count(repository_name: string, token: string) -> int:
+    return get_repository(repository_name, token).get_issues()[0].number
+
+
+def get_info_last_issue_body(repository_name: string, issue_number: int, token: string) -> string:
+    return get_repository(repository_name, token).get_issue(issue_number).body
+
+
+def create_issue(repo: github.Repository.Repository, title: string, content: string) -> None:
     repo.create_issue(title=title, body=content)
