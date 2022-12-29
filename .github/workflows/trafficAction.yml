@@ -35,6 +35,6 @@ jobs:
         poetry env info
     - name: run Python 
       run: |
-        python main.py
+        poetry run python main.py
       env:
         MY_TRAFFIC_TOKEN: ${{ secrets.MY_TRAFFIC_TOKEN }}
