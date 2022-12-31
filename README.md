@@ -13,6 +13,4 @@
 
 이는 [Issue](https://github.com/kkminseok/my-Repository-Traffic/issues)탭에 들어가서 확인할 수 있다.
 
-
-
 [고민과정](https://github.com/kkminseok/my-Repository-Traffic/wiki/%EA%B3%A0%EB%A0%A4%EC%82%AC%ED%95%AD)
