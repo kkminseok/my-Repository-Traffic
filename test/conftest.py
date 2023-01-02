@@ -1,12 +1,26 @@
 import pytest_asyncio
 
+
 @pytest_asyncio.fixture
 async def cloner() -> list:
-    return [('kkminseok/my-Repository-Traffic', 28), ('kkminseok/Book', 15), ('kkminseok/real-world-springboot-vue.js', 13), ('kkminseok/Algorithm_solution', 9), ('kkminseok/5_kyh_spring_db_1', 4), ('kkminseok/kkminseok.github.io', 3), ('kkminseok/JavaVersionDoc', 2), ('kkminseok/SPA_VUE_Spring_Example', 2), ('kkminseok/Springkyh', 2), ('kkminseok/2015110473_OpSc', 1), ('kkminseok/2020_capstone_project_human_to_animal', 1), ('kkminseok/2020_kotlin_deepleaning', 1), ('kkminseok/4_kyh_spring_mvc_note', 1), ('kkminseok/binance_NFT', 1), ('kkminseok/js_study', 1), ('kkminseok/leetcode', 1), ('kkminseok/OS_md', 1), ('kkminseok/springCICD_Practice', 1), ('kkminseok/todolist_book', 1)]
+    return [('kkminseok/my-Repository-Traffic', 28), ('kkminseok/Book', 15),
+            ('kkminseok/real-world-springboot-vue.js', 13), ('kkminseok/Algorithm_solution', 9),
+            ('kkminseok/5_kyh_spring_db_1', 4), ('kkminseok/kkminseok.github.io', 3), ('kkminseok/JavaVersionDoc', 2),
+            ('kkminseok/SPA_VUE_Spring_Example', 2), ('kkminseok/Springkyh', 2), ('kkminseok/2015110473_OpSc', 1),
+            ('kkminseok/2020_capstone_project_human_to_animal', 1), ('kkminseok/2020_kotlin_deepleaning', 1),
+            ('kkminseok/4_kyh_spring_mvc_note', 1), ('kkminseok/binance_NFT', 1), ('kkminseok/js_study', 1),
+            ('kkminseok/leetcode', 1), ('kkminseok/OS_md', 1), ('kkminseok/springCICD_Practice', 1),
+            ('kkminseok/todolist_book', 1)]
+
 
 @pytest_asyncio.fixture
 async def viewer() -> list:
-    return [('kkminseok/real-world-springboot-vue.js', 27), ('kkminseok/Book', 5), ('kkminseok/kkminseok.github.io', 3), ('kkminseok/binance_NFT', 2), ('kkminseok/JavaVersionDoc', 2), ('kkminseok/my-Repository-Traffic', 2), ('kkminseok/TIL_Interview', 2), ('kkminseok/2020_Ec2_openAPI_project', 1), ('kkminseok/4_kyh_spring_mvc_note', 1), ('kkminseok/Algorithm_solution', 1), ('kkminseok/jekyll-theme-chirpy', 1), ('kkminseok/kafka_message_example', 1), ('kkminseok/kkminseok', 1)]
+    return [('kkminseok/real-world-springboot-vue.js', 27), ('kkminseok/Book', 5), ('kkminseok/kkminseok.github.io', 3),
+            ('kkminseok/binance_NFT', 2), ('kkminseok/JavaVersionDoc', 2), ('kkminseok/my-Repository-Traffic', 2),
+            ('kkminseok/TIL_Interview', 2), ('kkminseok/2020_Ec2_openAPI_project', 1),
+            ('kkminseok/4_kyh_spring_mvc_note', 1), ('kkminseok/Algorithm_solution', 1),
+            ('kkminseok/jekyll-theme-chirpy', 1), ('kkminseok/kafka_message_example', 1), ('kkminseok/kkminseok', 1)]
+
 
 @pytest_asyncio.fixture
 async def last_issue() -> str:
