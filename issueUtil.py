@@ -36,8 +36,9 @@ def compare_prev_issue(current_cloner: list, current_view: list, last_issue: str
     prev_viewer = get_prev_viewer(last_issue)
     compare_result = []
     cloner_compare = compare_prev_cloner(prev_cloner, current_cloner)
+    viewer_compare = compare_prev_viewer(prev_viewer, current_view)
     compare_result.append(cloner_compare)
-    compare_result.append(prev_viewer)
+    compare_result.append(viewer_compare)
     return compare_result
 
 
