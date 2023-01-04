@@ -4,11 +4,8 @@
 name: get-Traffic-Action
 
 on:
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
+  schedule:
+    - cron:  '0 9 * * *'
 
 jobs:
   build:
