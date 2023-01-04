@@ -14,8 +14,7 @@
 ## 사용법
 
 1. fork
-2. Settings에서 깃허브 토큰을 `MY_TRAFFIC_TOKEN`라는 이름으로 
-
+2. Settings에서 깃허브 토큰을 `MY_TRAFFIC_TOKEN`라는 이름으로 등록한다.
 
 이는 [Issue](https://github.com/kkminseok/my-Repository-Traffic/issues)탭에 들어가서 확인할 수 있다.
 
