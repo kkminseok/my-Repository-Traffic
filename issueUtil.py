@@ -1,13 +1,21 @@
 def create_issue_content(cloner_data: list, view_data: list, last_issue_body: str) -> str:
     # 문자열 그냥 합치면 효율성이 떨이짐.
     github_url = 'https://github.com/'
-    issue_list = list()
+    issue_list = []
+    # 오늘까지의 총 cloner 수
+    total_cloner_sum = today_cloner(cloner_data)
+    total_view_sum = today_viewer(view_data)
     # 이전 이슈와 비교
-    compare_result = compare_prev_issue(cloner_data, view_data, last_issue_body)
+    compare_result = compare_prev_issue(cloner_data, view_data, last_issue_body, total_cloner_sum, total_view_sum)
     prev_clone_dict = compare_result[0]
     prev_view_dict = compare_result[1]
-    issue_cloner_header = '## Unique Cloner <br/> \n'
-    issue_viewer_header = '## Unique viewer <br/> \n'
+    prev_total_clone = prev_clone_dict["today"]
+    prev_total_view = prev_view_dict["today"]
+    today_clone_status = get_status(prev_total_clone)
+    today_view_status = get_status(prev_total_view)
+
+    issue_cloner_header = f'## Unique Cloner 😊today : {total_cloner_sum} ({today_clone_status}{prev_total_clone}) <br/> \n'
+    issue_viewer_header = f'## Unique viewer 😊today: {total_view_sum} ({today_view_status}{prev_total_view})<br/> \n'
     issue_list.append(issue_cloner_header)
 
     for unique_cloner in cloner_data:
@@ -31,15 +39,35 @@ def create_issue_content(cloner_data: list, view_data: list, last_issue_body: st
     return ''.join(issue_list)
 
 
-def compare_prev_issue(current_cloner: list, current_view: list, last_issue: str) -> list:
+def get_status(value: int) -> str:
+    if value > 0:
+        return "🔼"
+    elif value < 0:
+        return "🔽"
+    return "-"
+
+
+def today_cloner(today_cloner: list) -> int:
+    clone_sum = 0
+    for today_clone, val in today_cloner:
+        clone_sum += val
+    return clone_sum
+
+
+def today_viewer(today_viewer: list) -> int:
+    viewer_sum = 0
+    for today_view, val in today_viewer:
+        viewer_sum += val
+    return viewer_sum
+
+
+def compare_prev_issue(current_cloner: list, current_view: list, last_issue: str, today_cloner: int,
+                       today_viewer: int) -> list:
     prev_cloner = get_prev_cloner(last_issue)
     prev_viewer = get_prev_viewer(last_issue)
-    compare_result = []
-    cloner_compare = compare_prev_cloner(prev_cloner, current_cloner)
-    viewer_compare = compare_prev_viewer(prev_viewer, current_view)
-    compare_result.append(cloner_compare)
-    compare_result.append(viewer_compare)
-    return compare_result
+    cloner_compare = compare_prev_cloner(prev_cloner, current_cloner, today_cloner)
+    viewer_compare = compare_prev_viewer(prev_viewer, current_view, today_viewer)
+    return [cloner_compare, viewer_compare]
 
 
 def get_prev_cloner(last_issue: str) -> dict:
@@ -68,7 +96,7 @@ def get_prev_viewer(last_issue: str) -> dict:
     return prev_repo_info
 
 
-def compare_prev_cloner(prev_cloner, current_cloner) -> dict:
+def compare_prev_cloner(prev_cloner, current_cloner, today_cloner) -> dict:
     compare_result = {}
     for curr_cloner_data in current_cloner:
         curr_repo_name, curr_clone_count = curr_cloner_data
@@ -85,10 +113,11 @@ def compare_prev_cloner(prev_cloner, current_cloner) -> dict:
         else:
             cloner_status = "🔅 new"
         compare_result[curr_repo_name] = cloner_status
+    compare_result["today"] = prev_cloner["sum"] - today_cloner
     return compare_result
 
 
-def compare_prev_viewer(prev_viewer, current_viewer) -> dict:
+def compare_prev_viewer(prev_viewer, current_viewer, today_viewer) -> dict:
     compare_result = {}
     for curr_cloner_data in current_viewer:
         curr_repo_name, curr_view_count = curr_cloner_data
@@ -105,4 +134,5 @@ def compare_prev_viewer(prev_viewer, current_viewer) -> dict:
         else:
             viewer_status = "🔅 new"
         compare_result[curr_repo_name] = viewer_status
+    compare_result["today"] = prev_viewer["sum"] - today_viewer
     return compare_result
