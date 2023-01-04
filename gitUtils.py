@@ -1,10 +1,8 @@
-import string
-
 import github.PaginatedList
 from github import Github
 
 
-def get_all_repositories(token: string) -> github.PaginatedList.PaginatedList:
+def get_all_repositories(token: str) -> github.PaginatedList.PaginatedList:
     g = Github(token)
     return g.get_user().get_repos("public", "owner")
 
@@ -31,18 +29,18 @@ def get_all_repositories_visitor(repos: github.PaginatedList.PaginatedList) -> d
     return views_dict
 
 
-def get_repository(repository_name: string, token: string) -> github.PaginatedList.PaginatedList:
+def get_repository(repository_name: str, token: str) -> github.PaginatedList.PaginatedList:
     g = Github(token)
     return g.get_user().get_repo(repository_name)
 
 
-def get_repository_issue_count(repository_name: string, token: string) -> int:
+def get_repository_issue_count(repository_name: str, token: str) -> int:
     return get_repository(repository_name, token).get_issues()[0].number
 
 
-def get_info_last_issue_body(repository_name: string, issue_number: int, token: string) -> string:
+def get_info_last_issue_body(repository_name: str, issue_number: int, token: str) -> str:
     return get_repository(repository_name, token).get_issue(issue_number).body
 
 
-def create_issue(repo: github.Repository.Repository, title: string, content: string) -> None:
+def create_issue(repo: github.Repository.Repository, title: str, content: str) -> None:
     repo.create_issue(title=title, body=content)
