@@ -4,14 +4,15 @@ def create_issue_content(cloner_data: list, view_data: list, last_issue_body: st
     issue_list = list()
     # 이전 이슈와 비교
     compare_result = compare_prev_issue(cloner_data, view_data, last_issue_body)
-    print(compare_result)
+    prev_clone_dict = compare_result[0]
     issue_cloner_header = '## Unique Cloner <br/> \n'
     issue_viewer_header = '## Unique viewer <br/> \n'
     issue_list.append(issue_cloner_header)
 
     for unique_cloner in cloner_data:
         repo_name, cloner = unique_cloner
-        issue_list.append(f"- [{repo_name}]({github_url}" + repo_name + f") 의 클론 수:{cloner} <br/>\n")
+        cloner_update = prev_clone_dict[repo_name]
+        issue_list.append(f"- [{repo_name}]({github_url}" + repo_name + f") 의 클론 수:{cloner}  : {cloner_update} <br/>\n")
 
     issue_list.append('<br/>' * 5)
     issue_list.append("\n")
