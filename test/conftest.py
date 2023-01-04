@@ -26,7 +26,7 @@ async def viewer() -> list:
 async def last_issue() -> str:
     return "## Unique Cloner <br/>\n\
 - [kkminseok/my-Repository-Traffic](https://github.com/kkminseok/my-Repository-Traffic) 의 클론 수:18 <br/>\n\
-- [kkminseok/Book](https://github.com/kkminseok/Book) 의 클론 수:15 <br/>\n\
+- [kkminseok/Book](https://github.com/kkminseok/Book) 의 클론 수:100 <br/>\n\
 - [kkminseok/real-world-springboot-vue.js](https://github.com/kkminseok/real-world-springboot-vue.js) 의 클론 수:13 <br/>\n\
 - [kkminseok/Algorithm_solution](https://github.com/kkminseok/Algorithm_solution) 의 클론 수:9 <br/>\n\
 - [kkminseok/5_kyh_spring_db_1](https://github.com/kkminseok/5_kyh_spring_db_1) 의 클론 수:4 <br/>\n\
@@ -61,4 +61,13 @@ async def last_issue() -> str:
 - [kkminseok/kkminseok](https://github.com/kkminseok/kkminseok) 의 방문자:1 <br/>\n\
 "
 
+
+@pytest_asyncio.fixture
+async def today_cloner() -> int:
+    return 100
+
+
+@pytest_asyncio.fixture
+async def today_viewer() -> int:
+    return 100
 
