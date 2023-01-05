@@ -21,7 +21,7 @@ def create_issue_content(cloner_data: list, view_data: list, last_issue_body: st
     for unique_cloner in cloner_data:
         repo_name, cloner = unique_cloner
         cloner_update = prev_clone_dict[repo_name]
-        issue_list.append(f"- [{repo_name}]({github_url}" + repo_name + f") 의 클론 수:{cloner}  : {cloner_update} <br/>\n")
+        issue_list.append(f"- [{repo_name}]({github_url}" + repo_name + f") 의 클론 수:{cloner}  {cloner_update} <br/>\n")
 
     issue_list.append('<br/>' * 5)
     issue_list.append("\n")
@@ -31,11 +31,10 @@ def create_issue_content(cloner_data: list, view_data: list, last_issue_body: st
     for unique_view in view_data:
         repo_name, viewer = unique_view
         viewer_update = prev_view_dict[repo_name]
-        issue_list.append(f"- [{repo_name}]({github_url}" + repo_name + f") 의 방문자:{viewer} : {viewer_update} <br/>\n")
+        issue_list.append(f"- [{repo_name}]({github_url}" + repo_name + f") 의 방문자:{viewer} {viewer_update} <br/>\n")
 
     issue_list.append("If you, the creator, also visit or clone the repository daily, the results will be counted and "
                       "accumulated daily. Please be aware of this.<br/>")
-
     return ''.join(issue_list)
 
 
@@ -73,30 +72,32 @@ def compare_prev_issue(current_cloner: list, current_view: list, last_issue: str
 def get_prev_cloner(last_issue: str) -> dict:
     cloner_str = last_issue[:last_issue.find("Unique viewer")]
     prev_cloner_list = cloner_str.split('\n')
-    prev_repo_info = {}
+    prev_repo_info = {"sum": 0}
     for issue_info in prev_cloner_list:
         if issue_info.find('[') == -1:
             continue
         prev_repo_name = issue_info[issue_info.find('[') + 1:issue_info.find(']')]
-        prev_clone_count = issue_info[issue_info.rfind(':') + 1:issue_info.rfind('<')]
+        prev_clone_count = issue_info[issue_info.rfind(':') + 1:issue_info.rfind('(')]
         prev_repo_info[prev_repo_name] = int(prev_clone_count)
+        prev_repo_info["sum"] += int(prev_clone_count)
     return prev_repo_info
 
 
 def get_prev_viewer(last_issue: str) -> dict:
     cloner_str = last_issue[last_issue.find("Unique viewer") + 1:]
     prev_viewer_list = cloner_str.split('\n')
-    prev_repo_info = {}
+    prev_repo_info = {"sum": 0}
     for issue_info in prev_viewer_list:
         if issue_info.find('[') == -1:
             continue
         prev_repo_name = issue_info[issue_info.find('[') + 1:issue_info.find(']')]
-        prev_viewer_count = issue_info[issue_info.rfind(':') + 1:issue_info.rfind('<')]
+        prev_viewer_count = issue_info[issue_info.rfind(':') + 1:issue_info.rfind('(')]
         prev_repo_info[prev_repo_name] = int(prev_viewer_count)
+        prev_repo_info["sum"] += int(prev_viewer_count)
     return prev_repo_info
 
 
-def compare_prev_cloner(prev_cloner, current_cloner, today_cloner) -> dict:
+def compare_prev_cloner(prev_cloner, current_cloner, today_cloner_count) -> dict:
     compare_result = {}
     for curr_cloner_data in current_cloner:
         curr_repo_name, curr_clone_count = curr_cloner_data
@@ -111,28 +112,28 @@ def compare_prev_cloner(prev_cloner, current_cloner, today_cloner) -> dict:
             else:
                 cloner_status = "(🔽" + str(today_cloner) + ")"
         else:
-            cloner_status = "🔅 new"
+            cloner_status = "(🔅 new)"
         compare_result[curr_repo_name] = cloner_status
-    compare_result["today"] = prev_cloner["sum"] - today_cloner
+    compare_result["today"] = today_cloner_count - prev_cloner["sum"]
     return compare_result
 
 
-def compare_prev_viewer(prev_viewer, current_viewer, today_viewer) -> dict:
+def compare_prev_viewer(prev_viewer, current_viewer, today_viewer_count) -> dict:
     compare_result = {}
     for curr_cloner_data in current_viewer:
         curr_repo_name, curr_view_count = curr_cloner_data
         if curr_repo_name in prev_viewer:
             prev_count = prev_viewer[curr_repo_name]
             viewer_status = ""
-            today_cloner = curr_view_count - prev_count
-            if today_cloner > 0:
-                viewer_status = "(🔼" + str(today_cloner) + ")"
-            elif today_cloner == 0:
+            today_viewer = curr_view_count - prev_count
+            if today_viewer > 0:
+                viewer_status = "(🔼" + str(today_viewer) + ")"
+            elif today_viewer == 0:
                 viewer_status = "(-)"
             else:
-                viewer_status = "(🔽" + str(today_cloner) + ")"
+                viewer_status = "(🔽" + str(today_viewer) + ")"
         else:
-            viewer_status = "🔅 new"
+            viewer_status = "(🔅 new)"
         compare_result[curr_repo_name] = viewer_status
-    compare_result["today"] = prev_viewer["sum"] - today_viewer
+    compare_result["today"] = today_viewer_count - prev_viewer["sum"]
     return compare_result
