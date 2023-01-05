@@ -2,8 +2,8 @@ import os
 from datetime import datetime
 
 from pytz import timezone
-from gitUtils import *
-from issueUtil import create_issue_content
+from git_Utils import *
+from issue_Utils import create_issue_content
 
 if __name__ == "__main__":
     today = datetime.now(timezone('Asia/Seoul'))
