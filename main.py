@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from zoneinfo import ZoneInfo
+import pytz
 from git_utils import *
 from issue_utils import create_issue_content
 
@@ -10,7 +10,7 @@ def sort_items(items: dict) -> list:
 
 
 if __name__ == "__main__":
-    today = datetime.now(ZoneInfo('Asia/Seoul'))
+    today = datetime.now(pytz.timezone('Asia/Seoul'))
     today_date = today.strftime("%Y년 %m월 %d일")
     issue_title = f"오늘자 트래픽 변화({today_date})"
 

@@ -11,19 +11,17 @@ def get_all_repositories(token: str) -> github.PaginatedList.PaginatedList:
 def get_all_repositories_cloner(repositories: github.PaginatedList.PaginatedList) -> dict:
     cloner_counts = {}
     for repository in repositories:
-        clone_traffic = get_repository_clone_traffic(repository)
-        unique_cloner = clone_traffic['uniques']
-        if unique_cloner == 0:
+        unique_cloners = get_clone_traffic_for_repository(repository)
+        if unique_cloners == 0:
             continue
-        cloner_counts[repository.full_name] = unique_cloner
+        cloner_counts[repository.full_name] = unique_cloners
     return cloner_counts
 
 
 def get_all_repositories_visitor(repositories: github.PaginatedList.PaginatedList) -> dict:
     views_counts = {}
     for repository in repositories:
-        view_traffic = get_repository_view_traffic(repository)
-        unique_visitor = view_traffic['uniques']
+        unique_visitor = get_view_traffic_for_repository(repository)
         if unique_visitor == 0:
             continue
         views_counts[repository.full_name] = unique_visitor
@@ -47,8 +45,18 @@ def create_issue(repo: github.Repository.Repository, title: str, content: str) -
     repo.create_issue(title=title, body=content)
 
 
+def get_clone_traffic_for_repository(repository: github.Repository.Repository) -> int:
+    clone_traffic = get_repository_clone_traffic(repository)
+    return clone_traffic['uniques']
+
+
 def get_repository_clone_traffic(repository: github.Repository.Repository) -> dict:
     return repository.get_clones_traffic()
+
+
+def get_view_traffic_for_repository(repository: github.Repository.Repository) -> int:
+    view_traffic = get_repository_view_traffic(repository)
+    return view_traffic['uniques']
 
 
 def get_repository_view_traffic(repository: github.Repository.Repository) -> dict:

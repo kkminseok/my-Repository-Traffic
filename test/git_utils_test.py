@@ -1,4 +1,3 @@
-import github.PaginatedList
 from pytest_mock import MockerFixture
 
 from git_utils import *
