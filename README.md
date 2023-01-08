@@ -1,21 +1,21 @@
+[Korean Guide](https://github.com/kkminseok/my-Repository-Traffic/wiki/%ED%95%9C%EA%B8%80-%EA%B0%80%EC%9D%B4%EB%93%9C)
+
 # my-Repository-Traffic
-내 모든 레포지토리 하루 or 2주일간 트래픽을 볼 수 있는 git Action 스케줄러 작성
+want to create a Git Action scheduler that allows me to view the traffic for all of my repositories for a day or two weeks.
 
-내 레포지토리 중에 어떤 레포지토리를 사람들이 가장 많이 보고, 가장 많이 클론했을까?
+Is it not too inconvenient to have to go into the traffic for each repository to check?
 
-이를 확인하려면 매 레포지토리의 traffic을 들어가서 확인해야한다.
+I want to automate this process using API and Action scheduler.
 
-이 과정이 너무 귀찮지 않은가. 바로 API와 Action 스케줄을 통해 자동화해보고 싶어졌다.
+The goal is to rank the repositories by daily changes, daily visitors and cloners, and compare the data from the past two weeks.
 
-목표는 하루마다 레포지토리별 순위 증감표, 하루마다 레포지토리 방문자, 클로너 수 증감,2주일간의 이전 데이터와 비교를 하는 것이 목표다.
+With this data, I can see which of my repositories are the most popular and also check the trend.
 
-이 데이터들을 통해 내 레포지토리중에 가장 인기가 많은건 뭔지 확인할 수 있고, 트렌드도 확인할 수 있을거라 생각한다.
-
-## 사용법
+## how to use
 
 1. fork
-2. Settings에서 깃허브 토큰을 `MY_TRAFFIC_TOKEN`라는 이름으로 등록한다.
+2. In the settings, I will register a GitHub token under the name **MY_TRAFFIC_TOKEN**.
 
-이는 [Issue](https://github.com/kkminseok/my-Repository-Traffic/issues)탭에 들어가서 확인할 수 있다.
+Enter [Issue](https://github.com/kkminseok/my-Repository-Traffic/issues)Tab
 
-[고민과정](https://github.com/kkminseok/my-Repository-Traffic/wiki/%EA%B3%A0%EB%A0%A4%EC%82%AC%ED%95%AD)
+[Thinks](https://github.com/kkminseok/my-Repository-Traffic/wiki/%EA%B3%A0%EB%A0%A4%EC%82%AC%ED%95%AD)
