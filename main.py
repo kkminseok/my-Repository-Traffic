@@ -15,20 +15,19 @@ if __name__ == "__main__":
     issue_title = f"오늘자 트래픽 변화({today_date})"
 
     repository_name = "my-Repository-Traffic"
-    token = os.environ['MY_TRAFFIC_TOKEN']
-    #token = ''
+    #token = os.environ['MY_TRAFFIC_TOKEN']
+    token = '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'
 
-    repos = get_all_repositories(token)
-    sorted_cloner = sort_items(get_all_repositories_visitor(repos))
-    sorted_view = sort_items(get_all_repositories_cloner(repos))
+    repositories = get_all_repositories(token)
+    sorted_cloner_count = sort_items(get_all_repositories_visitor(repositories))
+    sorted_view_count = sort_items(get_all_repositories_cloner(repositories))
 
     last_issue_number = get_repository_issue_count(repository_name, token)
     last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
 
-    issue_content = create_issue_content(sorted_cloner, sorted_view, last_issue_body)
+    issue_content = create_issue_content(sorted_cloner_count, sorted_view_count, last_issue_body)
 
     repository = get_repository(repository_name, token)
-    print("complete")
 #    create_issue(repository, issue_title, issue_content)
 
 
