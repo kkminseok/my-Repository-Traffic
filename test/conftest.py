@@ -1,3 +1,7 @@
+from typing import List, Dict
+from unittest.mock import MagicMock
+
+import github
 import pytest_asyncio
 
 
@@ -71,3 +75,22 @@ async def today_cloner() -> int:
 async def today_viewer() -> int:
     return 100
 
+
+@pytest_asyncio.fixture
+async def token() -> str:
+    return 'abcdeftoken1234'
+
+
+@pytest_asyncio.fixture
+async def repositories() -> github.PaginatedList.PaginatedList:
+    class Repository:
+        def __init__(self, full_name):
+            self.full_name = full_name
+
+    mock_paginated_list = MagicMock(spec=github.PaginatedList.PaginatedList)
+    mock_paginated_list.__iter__.return_value = iter([
+        Repository(full_name="kkminseok.repo1"),
+        Repository(full_name="kkminseok.repo2"),
+        Repository(full_name="kkminseok.repo3"),
+    ])
+    return mock_paginated_list
