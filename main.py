@@ -15,8 +15,8 @@ if __name__ == "__main__":
     issue_title = f"오늘자 트래픽 변화({today_date})"
 
     repository_name = "my-Repository-Traffic"
-    #token = os.environ['MY_TRAFFIC_TOKEN']
-    token = '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'
+    token = os.environ['MY_TRAFFIC_TOKEN']
+    #token = ''
 
     repositories = get_all_repositories(token)
     sorted_cloner_count = sort_items(get_all_repositories_visitor(repositories))
