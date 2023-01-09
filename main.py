@@ -28,6 +28,6 @@ if __name__ == "__main__":
     issue_content = create_issue_content(sorted_cloner_count, sorted_view_count, last_issue_body)
 
     repository = get_repository(repository_name, token)
-#    create_issue(repository, issue_title, issue_content)
+    create_issue(repository, issue_title, issue_content)
 
 
