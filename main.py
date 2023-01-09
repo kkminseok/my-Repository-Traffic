@@ -19,8 +19,8 @@ if __name__ == "__main__":
     #token = ''
 
     repositories = get_all_repositories(token)
-    sorted_cloner_count = sort_items(get_all_repositories_visitor(repositories))
-    sorted_view_count = sort_items(get_all_repositories_cloner(repositories))
+    sorted_cloner_count = sort_items(get_all_repositories_cloner(repositories))
+    sorted_view_count = sort_items(get_all_repositories_visitor(repositories))
 
     last_issue_number = get_repository_issue_count(repository_name, token)
     last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
