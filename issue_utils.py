@@ -108,8 +108,8 @@ def compare_prev_cloner(prev_cloner: dict, current_cloner: list, today_clone_cou
         else:
             cloner_status = "(🔽{})".format(today_cloner)
 
-        if today_cloner == 0:
-            cloner_status = "new!!"
+        if today_cloner == clone_count:
+            cloner_status = "(🔅 new)"
         compare_result[repo_name] = cloner_status
     compare_result["today"] = today_clone_count - prev_cloner.get("sum", 0)
     return compare_result
