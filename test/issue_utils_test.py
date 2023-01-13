@@ -4,10 +4,10 @@ from issue_utils import compare_prev_issue, create_issue_content
 
 
 def test_create_issue_content(cloner: list, viewer: list, last_issue: str, mocker: MockerFixture):
-    mocker.patch("issue_Utils.get_prev_cloner", get_prev_cloner)
-    mocker.patch("issue_Utils.get_prev_viewer", get_prev_viewer)
-    mocker.patch("issue_Utils.compare_prev_cloner", compare_prev_cloner)
-    mocker.patch("issue_Utils.today_cloner", today_cloner)
+    mocker.patch("issue_utils.get_prev_cloner", get_prev_cloner)
+    mocker.patch("issue_utils.get_prev_viewer", get_prev_viewer)
+    mocker.patch("issue_utils.compare_prev_cloner", compare_prev_cloner)
+    mocker.patch("issue_utils.today_cloner", today_cloner)
     result = create_issue_content(cloner, viewer, last_issue)
     print(result)
 
@@ -19,11 +19,12 @@ def today_cloner(today_cloner: list) -> int:
     return clone_sum
 
 
-def test_compare_prev_issue(cloner: list, viewer: list, last_issue: str, today_cloner: int , today_viewer: int, mocker: MockerFixture):
-    mocker.patch("issue_Utils.get_prev_cloner", get_prev_cloner)
-    mocker.patch("issue_Utils.get_prev_viewer", get_prev_viewer)
-    mocker.patch("issue_Utils.compare_prev_cloner", compare_prev_cloner)
-    mocker.patch("issue_Utils.compare_prev_viewer", compare_prev_viewer)
+def test_compare_prev_issue(cloner: list, viewer: list, last_issue: str, today_cloner: int, today_viewer: int,
+                            mocker: MockerFixture):
+    mocker.patch("issue_utils.get_prev_cloner", get_prev_cloner)
+    mocker.patch("issue_utils.get_prev_viewer", get_prev_viewer)
+    mocker.patch("issue_utils.compare_prev_cloner", compare_prev_cloner)
+    mocker.patch("issue_utils.compare_prev_viewer", compare_prev_viewer)
     # last_issue parsing
     compare_prev_issue(cloner, viewer, last_issue, today_cloner, today_viewer)
 
@@ -56,25 +57,22 @@ def get_prev_viewer(last_issue: str) -> dict:
     return prev_repo_info
 
 
-def compare_prev_cloner(prev, curr, today_clone) -> dict:
+def compare_prev_cloner(prev_cloner: dict, current_cloner: list, today_clone_count: int) -> dict:
     compare_result = {}
-    for curr_cloner_data in curr:
-        curr_repo_name, curr_clone_count = curr_cloner_data
-        if curr_repo_name in prev:
-            prev_count = prev[curr_repo_name]
-            cloner_status = ""
-            today_cloner = curr_clone_count - prev_count
-            if today_cloner > 0:
-                cloner_status = "(🔼" + str(today_cloner) + ")"
-            elif today_cloner == 0:
-                cloner_status = "(-)"
-            else:
-                cloner_status = "(🔽" + str(today_cloner) + ")"
+    for repo_name, clone_count in current_cloner:
+        today_cloner = clone_count - prev_cloner.get(repo_name, 0)
+        if today_cloner > 0:
+            cloner_status = "(🔼{})".format(today_cloner)
+        elif today_cloner == 0:
+            cloner_status = "(-)"
         else:
+            cloner_status = "(🔽{})".format(today_cloner)
+
+        if today_cloner == 0:
             cloner_status = "new!!"
-        compare_result[curr_repo_name] = cloner_status
+        compare_result[repo_name] = cloner_status
     # 차이계산
-    compare_result["today"] = today_clone - prev["sum"]
+    compare_result["today"] = today_clone_count - prev_cloner.get("sum", 0)
     return compare_result
 
 
