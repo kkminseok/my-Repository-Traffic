@@ -15,6 +15,7 @@ pygithub = "^1.57"
 pytest-asyncio = "^0.20.3"
 pytest-mock = "^3.10.0"
 pytz = "^2022.7"
+pandas = "^1.5.3"
 
 
 [build-system]
