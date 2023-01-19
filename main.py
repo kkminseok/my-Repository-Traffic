@@ -1,7 +1,8 @@
 import os
+from dotenv import load_dotenv
 from datetime import datetime
 import pytz
-from git_utils import *
+from git_utils import get_all_repositories, get_all_repositories_cloner, get_all_repositories_visitor, get_repository_issue_count, get_info_last_issue_body, get_repository, create_issue
 from issue_utils import create_issue_content
 
 
@@ -10,13 +11,13 @@ def sort_items(items: dict) -> list:
 
 
 if __name__ == "__main__":
+    load_dotenv()
     today = datetime.now(pytz.timezone('Asia/Seoul'))
     today_date = today.strftime("%Y년 %m월 %d일")
     issue_title = f"오늘자 트래픽 변화({today_date})"
 
     repository_name = "my-Repository-Traffic"
     token = os.environ['MY_TRAFFIC_TOKEN']
-    #token = ''
 
     repositories = get_all_repositories(token)
     sorted_cloner_count = sort_items(get_all_repositories_cloner(repositories))
@@ -30,5 +31,6 @@ if __name__ == "__main__":
     print(issue_content)
     repository = get_repository(repository_name, token)
     create_issue(repository, issue_title, issue_content)
+
 
 

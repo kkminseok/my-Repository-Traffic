@@ -151,24 +151,21 @@ def get_prev_viewer(last_issue: str) -> dict:
     return prev_repo_info
 
 
-def compare_prev_cloner(prev_cloner, current_cloner, today_cloner_count) -> dict:
+def compare_prev_cloner(prev_cloner: dict, current_cloner: list, today_clone_count: int) -> dict:
     compare_result = {}
-    for curr_cloner_data in current_cloner:
-        curr_repo_name, curr_clone_count = curr_cloner_data
-        if curr_repo_name in prev_cloner:
-            prev_count = prev_cloner[curr_repo_name]
-            cloner_status = ""
-            today_cloner = curr_clone_count - prev_count
-            if today_cloner > 0:
-                cloner_status = "(🔼" + str(today_cloner) + ")"
-            elif today_cloner == 0:
-                cloner_status = "(-)"
-            else:
-                cloner_status = "(🔽" + str(today_cloner) + ")"
+    for repo_name, clone_count in current_cloner:
+        today_cloner = clone_count - prev_cloner.get(repo_name, 0)
+        if today_cloner > 0:
+            cloner_status = "(🔼{})".format(today_cloner)
+        elif today_cloner == 0:
+            cloner_status = "(-)"
         else:
+            cloner_status = "(🔽{})".format(today_cloner)
+
+        if today_cloner == clone_count:
             cloner_status = "(🔅 new)"
-        compare_result[curr_repo_name] = cloner_status
-    compare_result["today"] = today_cloner_count - prev_cloner["sum"]
+        compare_result[repo_name] = cloner_status
+    compare_result["today"] = today_clone_count - prev_cloner.get("sum", 0)
     return compare_result
 
 

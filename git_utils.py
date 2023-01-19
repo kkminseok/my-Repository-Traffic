@@ -34,7 +34,7 @@ def get_repository(repository_name: str, token: str) -> github.PaginatedList.Pag
 
 
 def get_repository_issue_count(repository_name: str, token: str) -> int:
-    return get_repository(repository_name, token).get_issues()[0].number
+    return get_repository(repository_name, token).get_issues(labels=["issue"])[0].number
 
 
 def get_info_last_issue_body(repository_name: str, issue_number: int, token: str) -> str:
@@ -42,7 +42,7 @@ def get_info_last_issue_body(repository_name: str, issue_number: int, token: str
 
 
 def create_issue(repo: github.Repository.Repository, title: str, content: str) -> None:
-    repo.create_issue(title=title, body=content)
+    repo.create_issue(title=title, body=content, labels=["issue"])
 
 
 def get_clone_traffic_for_repository(repository: github.Repository.Repository) -> int:

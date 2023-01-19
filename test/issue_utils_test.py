@@ -8,8 +8,7 @@ def test_create_issue_content(cloner: list, viewer: list, last_issue: str, mocke
     mocker.patch("issue_utils.get_prev_viewer", get_prev_viewer)
     mocker.patch("issue_utils.compare_prev_cloner", compare_prev_cloner)
     mocker.patch("issue_utils.today_cloner", today_cloner)
-    token = "token"
-    result = create_issue_content(cloner, viewer, last_issue, token)
+    result = create_issue_content(cloner, viewer, last_issue)
     print(result)
 
 
@@ -20,7 +19,8 @@ def today_cloner(today_cloner: list) -> int:
     return clone_sum
 
 
-def test_compare_prev_issue(cloner: list, viewer: list, last_issue: str, today_cloner: int , today_viewer: int, mocker: MockerFixture):
+def test_compare_prev_issue(cloner: list, viewer: list, last_issue: str, today_cloner: int, today_viewer: int,
+                            mocker: MockerFixture):
     mocker.patch("issue_utils.get_prev_cloner", get_prev_cloner)
     mocker.patch("issue_utils.get_prev_viewer", get_prev_viewer)
     mocker.patch("issue_utils.compare_prev_cloner", compare_prev_cloner)
