@@ -26,8 +26,9 @@ if __name__ == "__main__":
     last_issue_number = get_repository_issue_count(repository_name, token)
     last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
 
-    issue_content = create_issue_content(sorted_cloner_count, sorted_view_count, last_issue_body)
+    issue_content = create_issue_content(sorted_cloner_count, sorted_view_count, last_issue_body, token)
 
+    print(issue_content)
     repository = get_repository(repository_name, token)
     create_issue(repository, issue_title, issue_content)
 
