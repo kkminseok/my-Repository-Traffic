@@ -27,8 +27,8 @@ def create_issue_content(cloner_data: list, view_data: list, last_issue_body: st
     today_clone_status = get_status(prev_total_clone)
     today_view_status = get_status(prev_total_view)
 
-    issue_clone_summary = '`The number of clones in two weeks.` <br/>'
-    issue_view_summary = '`The number of view in two weeks.` <br/>'
+    issue_clone_summary = '`The number of clones in two weeks.` <br/> \n'
+    issue_view_summary = '`The number of view in two weeks.` <br/> \n'
 
     issue_cloner_header = f'## Unique Cloner 😊today : {total_cloner_sum} ({today_clone_status}{prev_total_clone}) <br/> \n'
     issue_viewer_header = f'## Unique viewer 😊today: {total_view_sum} ({today_view_status}{prev_total_view})<br/> \n'
