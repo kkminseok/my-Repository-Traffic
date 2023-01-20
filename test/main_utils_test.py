@@ -1,4 +1,5 @@
 from datetime import datetime
+import re
 import pandas as pd
 import pytz
 
@@ -17,3 +18,10 @@ def test_compare_datetime():
     pandas_today = pd.Timestamp('2023-01-19 00:00:00')
     assert today.month == pandas_today.month
     assert today.day == pandas_today.day
+
+
+def test_regrex_search():
+    my_traffic_data = 'clone of kkminseok/my-Repository-Traffic: 17 (🔽-6) / today: 2'
+    match = re.findall(r'(\d+)', my_traffic_data)
+    if match:
+        print(match)
