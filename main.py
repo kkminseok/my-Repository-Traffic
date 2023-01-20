@@ -1,23 +1,11 @@
-import os
-from dotenv import load_dotenv
-from datetime import datetime
-import pytz
 from git_utils import get_all_repositories, get_all_repositories_cloner, get_all_repositories_visitor, get_repository_issue_count, get_info_last_issue_body, get_repository, create_issue
 from issue_utils import create_issue_content
+from module.date import get_today
+from module.token import get_token
 
 
 def sort_items(items: dict) -> list:
     return sorted(items.items(), reverse=True, key=lambda item: item[1])
-
-
-def get_today() -> datetime:
-    today = datetime.now(pytz.timezone('Asia/Seoul'))
-    return today.strftime("%Y년 %m월 %d일")
-
-
-def get_token() -> str:
-    load_dotenv()
-    return os.environ['MY_TRAFFIC_TOKEN']
 
 
 if __name__ == "__main__":
@@ -29,7 +17,6 @@ if __name__ == "__main__":
 
     repositories = get_all_repositories(token)
     sorted_cloner_count = sort_items(get_all_repositories_cloner(repositories))
-
     sorted_view_count = sort_items(get_all_repositories_visitor(repositories))
 
     last_issue_number = get_repository_issue_count(repository_name, token)
