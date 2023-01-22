@@ -1,7 +1,7 @@
 from datetime import datetime
 import pytz
 
-from git_utils import get_repository, get_repository_clone_traffic, get_repository_view_traffic
+from module.git_api import get_repository, get_repository_clone_traffic, get_repository_view_traffic
 
 
 def create_issue_content(cloner_data: list, view_data: list, last_issue_body: str, token: str) -> str:

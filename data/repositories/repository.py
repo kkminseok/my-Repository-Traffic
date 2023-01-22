@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class MyRepository:
+class Repository:
     name: str
     cloner_count: int
     viewer_count: int

@@ -11,6 +11,7 @@ def get_all_repositories(token: str) -> github.PaginatedList.PaginatedList:
 def get_all_repositories_cloner(repositories: github.PaginatedList.PaginatedList) -> dict:
     cloner_counts = {}
     for repository in repositories:
+        print(repository)
         unique_cloners = get_clone_traffic_for_repository(repository)
         if unique_cloners == 0:
             continue

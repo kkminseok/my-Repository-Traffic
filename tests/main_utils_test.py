@@ -3,6 +3,8 @@ import re
 import pandas as pd
 import pytz
 
+from data.repositories.my_repositories import MyRepositories, Repository
+
 
 def test_get_today_info():
     today = datetime.now(pytz.timezone('Asia/Seoul'))
@@ -25,3 +27,13 @@ def test_regrex_search():
     match = re.findall(r'(\d+)', my_traffic_data)
     if match:
         print(match)
+
+
+def test_data_class():
+    my_repositories = MyRepositories(repositories={})
+    repository = Repository(name="123", cloner_count=1, viewer_count=3)
+    repository2 = Repository(name="1234", cloner_count=1, viewer_count=3)
+    my_repositories.repositories[repository.name] = repository
+    my_repositories.repositories[repository2.name] = repository2
+
+    assert len(my_repositories.repositories) == 2
