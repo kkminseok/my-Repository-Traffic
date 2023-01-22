@@ -17,11 +17,11 @@ def test_get_all_repositories(mocker: MockerFixture):
 def test_singleton():
     my_repositories = MyRepositories.instance()
     repository = Repository(name="123", cloner_count=1, viewer_count=3)
-    print(my_repositories.repositories)
+    assert my_repositories.repositories == {}
 
     my_repositories.add_repository(repository)
     my_repositories2 = MyRepositories.instance()
-    print(my_repositories2.repositories)
+    assert repository.name in my_repositories2.repositories
 
 
 def get_repositories_test_object():
