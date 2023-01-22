@@ -25,4 +25,4 @@ Enter [Issue](https://github.com/kkminseok/my-Repository-Traffic/issues)Tab
 
 ## The process of thinking about producing efficient code
 
-- We have applied first-class collection to manage the state and behavior of Repository objects.
+- We have applied first-class collection to manage the state and behavior of `Repository` objects.
