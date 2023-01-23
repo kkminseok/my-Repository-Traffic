@@ -11,6 +11,22 @@ The goal is to rank the repositories by daily changes, daily visitors and cloner
 
 With this data, I can see which of my repositories are the most popular and also check the trend.
 
+## Project Structure
+
+```text
+├── README.md
+├── __pycache__
+├── data.    -> data model
+├── main.py.  -> main code
+├── module.   -> service code
+├── poetry.lock. -> poetry dependency
+├── pyproject.toml
+├── pytest.ini.  -> test env
+├── tests.  -> test codes
+└── venv.
+
+```
+
 ## how to use
 
 1. fork
