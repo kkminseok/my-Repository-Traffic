@@ -1,5 +1,5 @@
-from module.git_api import get_all_repositories_cloner, get_all_repositories_visitor, get_repository_issue_count, get_info_last_issue_body, get_repository
-from module.git_service import get_all_repositories, test
+from module.git_api import get_all_repositories_visitor, get_repository_issue_count, get_info_last_issue_body, get_repository
+from module.git_service import init_all_repositories, get_all_repositories_cloner
 from module.issue_utils import create_issue_content
 from module.date import get_today
 from module.token import get_token
@@ -16,10 +16,11 @@ if __name__ == "__main__":
     repository_name = "my-Repository-Traffic"
     token = get_token()
 
-    get_all_repositories(token)
+    init_all_repositories(token)
 
     # Todo Refactoring
-    sorted_cloner_count = sort_items(get_all_repositories_cloner(repositories))
+    sorted_cloner_count = sort_items(get_all_repositories_cloner())
+
     sorted_view_count = sort_items(get_all_repositories_visitor(repositories))
 
     last_issue_number = get_repository_issue_count(repository_name, token)

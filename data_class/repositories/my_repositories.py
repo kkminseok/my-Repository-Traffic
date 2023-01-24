@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from data.repositories.repository import Repository
+from data_class.repositories.repository import Repository
 
 
 @dataclass

@@ -3,7 +3,7 @@ import re
 import pandas as pd
 import pytz
 
-from data.repositories.my_repositories import MyRepositories, Repository
+from data_class.repositories.my_repositories import MyRepositories, Repository
 
 
 def test_get_today_info():

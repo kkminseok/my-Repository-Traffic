@@ -1,16 +1,22 @@
-import github
-
-from module.git_service import get_all_repositories
+from module.git_service import init_all_repositories, get_all_repositories_cloner
 from pytest_mock import MockerFixture, mocker
-from data.repositories.my_repositories import MyRepositories
-from data.repositories.repository import Repository
+from data_class.repositories.my_repositories import MyRepositories
+from data_class.repositories.repository import Repository
 
 
 def test_get_all_repositories(mocker: MockerFixture):
     token = "ghp_hbQtNasdzx3xWWoFmpQzxcfslTBs51btjE0sdasd;9"
     mock_repositories = get_repositories_test_object()
     mocker.patch("module.git_api.get_all_repositories", return_value=mock_repositories)
-    get_all_repositories(token)
+    init_all_repositories(token)
+    assert True
+
+
+def test_get_all_repositories_cloner(mocker: MockerFixture):
+    instance = MyRepositories()
+    mock_repositories = get_repositories_test_object()
+    mocker.patch.object(instance,"instance",return_value=mock_repositories)
+    get_all_repositories_cloner()
     assert True
 
 
@@ -26,8 +32,8 @@ def test_singleton():
 
 def get_repositories_test_object():
     class Repository:
-        def __init__(self, full_name):
-            self.full_name = full_name
+        def __init__(self, name):
+            self.name = name
     repository1 = Repository("kkminseok/repository1")
     repository2 = Repository("kkminseok/repository2")
 
