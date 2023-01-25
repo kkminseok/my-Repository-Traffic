@@ -19,8 +19,8 @@ if __name__ == "__main__":
     init_all_repositories(token)
 
     # Todo Refactoring
-    sorted_cloner_count = sort_items(get_all_repositories_cloner())
-
+    #sorted_cloner_count = sort_items(get_all_repositories_cloner())
+    get_all_repositories_cloner()
     sorted_view_count = sort_items(get_all_repositories_visitor(repositories))
 
     last_issue_number = get_repository_issue_count(repository_name, token)
