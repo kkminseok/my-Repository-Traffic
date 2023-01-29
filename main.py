@@ -1,5 +1,5 @@
-from module.git_api import get_all_repositories_visitor, get_repository_issue_count, get_info_last_issue_body, get_repository
-from module.git_service import init_all_repositories, set_all_repositories_cloner
+from module.git_api import get_repository_issue_count, get_info_last_issue_body, get_repository
+from module.git_service import init_all_repositories, set_all_repositories_cloner, set_all_repositories_visitor
 from module.issue_utils import create_issue_content
 from module.date import get_today
 from module.token import get_token
@@ -16,7 +16,7 @@ if __name__ == "__main__":
 
     set_all_repositories_cloner(git_repositories)
 
-    #sorted_view_count = sort_items(get_all_repositories_visitor(repositories))
+    set_all_repositories_visitor(git_repositories)
 
     last_issue_number = get_repository_issue_count(repository_name, token)
     last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)

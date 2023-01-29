@@ -1,7 +1,7 @@
 from module.git_service import init_all_repositories, set_all_repositories_cloner
 from pytest_mock import MockerFixture, mocker
 from data_class.repositories.cloner_repositories import ClonerRepositories
-from data_class.repositories.clonerrepository import ClonerRepository
+from data_class.repositories.cloner_repository import ClonerRepository
 
 
 def test_get_all_repositories(mocker: MockerFixture):
@@ -15,7 +15,7 @@ def test_get_all_repositories(mocker: MockerFixture):
 def test_get_all_repositories_cloner(mocker: MockerFixture):
     instance = ClonerRepositories()
     mock_repositories = get_repositories_test_object()
-    mocker.patch.object(instance,"instance",return_value=mock_repositories)
+    mocker.patch.object(instance, "instance", return_value=mock_repositories)
     set_all_repositories_cloner()
     assert True
 
@@ -34,10 +34,8 @@ def get_repositories_test_object():
     class Repository:
         def __init__(self, name):
             self.name = name
+
     repository1 = Repository("kkminseok/repository1")
     repository2 = Repository("kkminseok/repository2")
 
     return [repository1, repository2]
-
-
-

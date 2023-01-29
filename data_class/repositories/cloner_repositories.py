@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from data_class.repositories.clonerrepository import ClonerRepository
+from data_class.repositories.cloner_repository import ClonerRepository
 
 
 @dataclass

@@ -13,14 +13,9 @@ def get_all_repositories_cloner(repository: github.Repository.Repository) -> dic
     return unique_cloners
 
 
-def get_all_repositories_visitor(repositories: github.PaginatedList.PaginatedList) -> dict:
-    views_counts = {}
-    for repository in repositories:
-        unique_visitor = get_view_traffic_for_repository(repository)
-        if unique_visitor == 0:
-            continue
-        views_counts[repository.full_name] = unique_visitor
-    return views_counts
+def get_all_repositories_visitor(repository: github.Repository.Repository) -> dict:
+    unique_visitor = get_view_traffic_for_repository(repository)
+    return unique_visitor
 
 
 def get_repository(repository_name: str, token: str) -> github.PaginatedList.PaginatedList:
