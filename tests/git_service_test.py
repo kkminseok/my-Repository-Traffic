@@ -1,7 +1,7 @@
-from module.git_service import init_all_repositories, get_all_repositories_cloner
+from module.git_service import init_all_repositories, set_all_repositories_cloner
 from pytest_mock import MockerFixture, mocker
-from data_class.repositories.my_repositories import MyRepositories
-from data_class.repositories.repository import Repository
+from data_class.repositories.cloner_repositories import ClonerRepositories
+from data_class.repositories.clonerrepository import ClonerRepository
 
 
 def test_get_all_repositories(mocker: MockerFixture):
@@ -13,20 +13,20 @@ def test_get_all_repositories(mocker: MockerFixture):
 
 
 def test_get_all_repositories_cloner(mocker: MockerFixture):
-    instance = MyRepositories()
+    instance = ClonerRepositories()
     mock_repositories = get_repositories_test_object()
     mocker.patch.object(instance,"instance",return_value=mock_repositories)
-    get_all_repositories_cloner()
+    set_all_repositories_cloner()
     assert True
 
 
 def test_singleton():
-    my_repositories = MyRepositories.instance()
-    repository = Repository(name="123", cloner_count=1, viewer_count=3)
+    my_repositories = ClonerRepositories.instance()
+    repository = ClonerRepository(name="123", cloner_count=1, viewer_count=3)
     assert my_repositories.repositories == {}
 
     my_repositories.add_repository(repository)
-    my_repositories2 = MyRepositories.instance()
+    my_repositories2 = ClonerRepositories.instance()
     assert repository.name in my_repositories2.repositories
 
 

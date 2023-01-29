@@ -1,12 +1,8 @@
 from module.git_api import get_all_repositories_visitor, get_repository_issue_count, get_info_last_issue_body, get_repository
-from module.git_service import init_all_repositories, get_all_repositories_cloner
+from module.git_service import init_all_repositories, set_all_repositories_cloner
 from module.issue_utils import create_issue_content
 from module.date import get_today
 from module.token import get_token
-
-
-def sort_items(items: dict) -> list:
-    return sorted(items.items(), reverse=True, key=lambda item: item[1])
 
 
 if __name__ == "__main__":
@@ -16,12 +12,11 @@ if __name__ == "__main__":
     repository_name = "my-Repository-Traffic"
     token = get_token()
 
-    init_all_repositories(token)
+    git_repositories = init_all_repositories(token)
 
-    # Todo Refactoring
-    sorted_cloner_count = sort_items(get_all_repositories_cloner())
+    set_all_repositories_cloner(git_repositories)
 
-    sorted_view_count = sort_items(get_all_repositories_visitor(repositories))
+    #sorted_view_count = sort_items(get_all_repositories_visitor(repositories))
 
     last_issue_number = get_repository_issue_count(repository_name, token)
     last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
@@ -31,6 +26,4 @@ if __name__ == "__main__":
     print(issue_content)
     repository = get_repository(repository_name, token)
     #create_issue(repository, issue_title, issue_content)
-
-
 

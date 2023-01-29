@@ -8,15 +8,9 @@ def get_all_repositories(token: str) -> github.PaginatedList.PaginatedList:
     return client.get_user().get_repos("public", "owner")
 
 
-def get_all_repositories_cloner(repositories: github.PaginatedList.PaginatedList) -> dict:
-    cloner_counts = {}
-    for repository in repositories:
-        print(repository)
-        unique_cloners = get_clone_traffic_for_repository(repository)
-        if unique_cloners == 0:
-            continue
-        cloner_counts[repository.full_name] = unique_cloners
-    return cloner_counts
+def get_all_repositories_cloner(repository: github.Repository.Repository) -> dict:
+    unique_cloners = get_clone_traffic_for_repository(repository)
+    return unique_cloners
 
 
 def get_all_repositories_visitor(repositories: github.PaginatedList.PaginatedList) -> dict:

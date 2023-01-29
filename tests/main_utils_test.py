@@ -3,7 +3,7 @@ import re
 import pandas as pd
 import pytz
 
-from data_class.repositories.my_repositories import MyRepositories, Repository
+from data_class.repositories.cloner_repositories import ClonerRepositories, ClonerRepository
 
 
 def test_get_today_info():
@@ -30,9 +30,9 @@ def test_regrex_search():
 
 
 def test_data_class():
-    my_repositories = MyRepositories(repositories={})
-    repository = Repository(name="123", cloner_count=1, viewer_count=3)
-    repository2 = Repository(name="1234", cloner_count=1, viewer_count=3)
+    my_repositories = ClonerRepositories(repositories={})
+    repository = ClonerRepository(name="123", cloner_count=1, viewer_count=3)
+    repository2 = ClonerRepository(name="1234", cloner_count=1, viewer_count=3)
     my_repositories.repositories[repository.name] = repository
     my_repositories.repositories[repository2.name] = repository2
 
