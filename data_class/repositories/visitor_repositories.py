@@ -12,6 +12,7 @@ class VisitorRepositories:
         if cls._instance is None:
             cls._instance = cls.__new__(cls)
             cls._instance.repositories = dict()
+            cls._instance.visitor_sum = 0
         return cls._instance
 
     '''
@@ -22,3 +23,4 @@ class VisitorRepositories:
         if repo_full_name not in self.repositories:
             self.repositories[repo_full_name] = VisitorRepository(name=repo_full_name.split('/')[1],
                                                                   visitor_count=visitor_count)
+            self.visitor_sum += visitor_count
