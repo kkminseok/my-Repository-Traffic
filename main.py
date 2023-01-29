@@ -1,9 +1,9 @@
 from module.git_api import get_repository_issue_count, get_info_last_issue_body, get_repository
-from module.git_service import init_all_repositories, set_all_repositories_cloner, set_all_repositories_visitor, set_all_repositories_today_cloner
+from module.git_service import init_all_repositories, set_all_repositories_cloner, set_all_repositories_visitor, \
+    set_all_repositories_today_cloner, set_all_repositories_today_viewer
 from module.issue_utils import create_issue_content
 from module.date import get_today
 from module.token import get_token
-
 
 if __name__ == "__main__":
     today_date = get_today()
@@ -18,6 +18,7 @@ if __name__ == "__main__":
     set_all_repositories_today_cloner(token)
 
     set_all_repositories_visitor(git_repositories)
+    set_all_repositories_today_viewer(token)
 
     last_issue_number = get_repository_issue_count(repository_name, token)
     last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
@@ -26,5 +27,4 @@ if __name__ == "__main__":
 
     print(issue_content)
     repository = get_repository(repository_name, token)
-    #create_issue(repository, issue_title, issue_content)
-
+    # create_issue(repository, issue_title, issue_content)

@@ -57,3 +57,20 @@ def set_all_repositories_today_cloner(token: str) -> None:
 
         if today.month == last_cloner.timestamp.month and today.day == last_cloner.timestamp.day:
             repository.today_cloner = last_cloner.uniques
+
+
+def set_all_repositories_today_viewer(token: str) -> None:
+    """
+    set_all_repositories_today_cloner()가 오늘자 클론 여부를 판단하는 메소드라면, 이 메소드는 오늘자 방문 여부를 체크한다.
+    :param token:
+    :return:
+    """
+    my_repositories = VisitorRepositories.instance().repositories
+    for full_name, repository in my_repositories.items():
+        git_repository = git_api.get_repository(repository.name, token)
+        today = datetime.now(pytz.timezone('Asia/Seoul'))
+        last_visitor = git_api.get_repository_view_traffic(git_repository)['views'][-1]
+
+        if today.month == last_visitor.timestamp.month and today.day == last_visitor.timestamp.day:
+            repository.today_visitor = last_visitor.uniques
+    print("visitor:", my_repositories)

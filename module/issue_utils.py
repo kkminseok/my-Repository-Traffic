@@ -16,9 +16,6 @@ def create_issue_content(last_issue_body: str, token: str) -> str:
     total_cloner_sum = ClonerRepositories.instance().cloner_sum
     total_viewer_sum = VisitorRepositories.instance().visitor_sum
 
-    # 오늘 unique viewer 수
-    today_unique_viewer = today_viewer(view_data, token)
-
     # 이전 이슈와 비교
     compare_result = compare_prev_issue(cloner_data, view_data, last_issue_body, total_cloner_sum, total_view_sum)
     prev_clone_dict = compare_result[0]
@@ -75,19 +72,6 @@ def is_today(repository_name: str, data: dict):
     if repository_name in data:
         return f"/ today: {data[repository_name]}"
     return ""
-
-
-def today_viewer(today_viewer: list, token: str) -> dict:
-    today_viewer_dict = {}
-    for repository_fullname, val in today_viewer:
-        repository_name = repository_fullname.split('/')[1]
-        repository = get_repository(repository_name, token)
-        today = datetime.now(pytz.timezone('Asia/Seoul'))
-        last_viewer = get_repository_view_traffic(repository)['views'][-1]
-
-        if today.month == last_viewer.timestamp.month and today.day == last_viewer.timestamp.day:
-            today_viewer_dict[repository_fullname] = last_viewer.uniques
-    return today_viewer_dict
 
 
 def compare_prev_issue(current_cloner: list, current_view: list, last_issue: str, today_cloner: int,
