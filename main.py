@@ -21,10 +21,14 @@ if __name__ == "__main__":
     set_all_repositories_today_viewer(token)
 
     last_issue_number = get_repository_issue_count(repository_name, token)
-    last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
+    # 최초인 경우는 바로 이슈를 만든다.
+    if last_issue_number is None:
+        pass
+    else:
+        last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
+        #TODO 이전 이슈에 대한 정보도 미리 파싱해 두는게 좋을 것
 
-    issue_content = create_issue_content(last_issue_body, token)
-
-    print(issue_content)
-    repository = get_repository(repository_name, token)
-    # create_issue(repository, issue_title, issue_content)
+        issue_content = create_issue_content(last_issue_body, token)
+        print(issue_content)
+        repository = get_repository(repository_name, token)
+        # create_issue(repository, issue_title, issue_content)

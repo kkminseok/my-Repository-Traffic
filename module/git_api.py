@@ -24,7 +24,11 @@ def get_repository(repository_name: str, token: str) -> github.PaginatedList.Pag
 
 
 def get_repository_issue_count(repository_name: str, token: str) -> int:
-    return get_repository(repository_name, token).get_issues(labels=["issue"])[0].number
+    issues = get_repository(repository_name, token).get_issues(labels=["issue"])
+    # 최초인 경우
+    if issues is None:
+        return None
+    return issues[0].number
 
 
 def get_info_last_issue_body(repository_name: str, issue_number: int, token: str) -> str:

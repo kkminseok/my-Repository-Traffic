@@ -1,7 +1,3 @@
-from datetime import datetime
-import pytz
-
-from module.git_api import get_repository, get_repository_clone_traffic, get_repository_view_traffic
 from data_class.repositories.cloner_repositories import ClonerRepositories
 from data_class.repositories.visitor_repositories import VisitorRepositories
 
@@ -17,7 +13,7 @@ def create_issue_content(last_issue_body: str, token: str) -> str:
     total_viewer_sum = VisitorRepositories.instance().visitor_sum
 
     # 이전 이슈와 비교
-    compare_result = compare_prev_issue(cloner_data, view_data, last_issue_body, total_cloner_sum, total_view_sum)
+    compare_result = compare_prev_issue(cloner_data, view_data, last_issue_body, total_cloner_sum, total_viewer_sum)
     prev_clone_dict = compare_result[0]
     prev_view_dict = compare_result[1]
     prev_total_clone = prev_clone_dict["today"]
@@ -76,6 +72,7 @@ def is_today(repository_name: str, data: dict):
 
 def compare_prev_issue(current_cloner: list, current_view: list, last_issue: str, today_cloner: int,
                        today_viewer: int) -> list:
+    print("last issue:", last_issue)
     prev_cloner = get_prev_cloner(last_issue)
     prev_viewer = get_prev_viewer(last_issue)
     cloner_compare = compare_prev_cloner(prev_cloner, current_cloner, today_cloner)
