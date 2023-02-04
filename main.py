@@ -1,36 +1,34 @@
-import os
-from dotenv import load_dotenv
-from datetime import datetime
-import pytz
-from git_utils import get_all_repositories, get_all_repositories_cloner, get_all_repositories_visitor, get_repository_issue_count, get_info_last_issue_body, get_repository, create_issue
-from issue_utils import create_issue_content
-
-
-def sort_items(items: dict) -> list:
-    return sorted(items.items(), reverse=True, key=lambda item: item[1])
-
+from module.git_api import get_repository_issue_count, get_info_last_issue_body, get_repository
+from module.git_service import init_all_repositories, set_all_repositories_cloner, set_all_repositories_visitor, \
+    set_all_repositories_today_cloner, set_all_repositories_today_viewer
+from module.issue_utils import create_issue_content
+from module.date import get_today
+from module.token import get_token
 
 if __name__ == "__main__":
-    load_dotenv()
-    today = datetime.now(pytz.timezone('Asia/Seoul'))
-    today_date = today.strftime("%Y년 %m월 %d일")
-    issue_title = f"오늘자 트래픽 변화({today_date})"
+    today_date = get_today()
+    issue_title = f"🔅Today's Traffic ({today_date})"
 
     repository_name = "my-Repository-Traffic"
-    token = os.environ['MY_TRAFFIC_TOKEN']
+    token = get_token()
 
-    repositories = get_all_repositories(token)
-    sorted_cloner_count = sort_items(get_all_repositories_cloner(repositories))
-    sorted_view_count = sort_items(get_all_repositories_visitor(repositories))
+    git_repositories = init_all_repositories(token)
+
+    set_all_repositories_cloner(git_repositories)
+    set_all_repositories_today_cloner(token)
+
+    set_all_repositories_visitor(git_repositories)
+    set_all_repositories_today_viewer(token)
 
     last_issue_number = get_repository_issue_count(repository_name, token)
-    last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
+    # 최초인 경우는 바로 이슈를 만든다.
+    if last_issue_number is None:
+        pass
+    else:
+        last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
+        #TODO 이전 이슈에 대한 정보도 미리 파싱해 두는게 좋을 것
 
-    issue_content = create_issue_content(sorted_cloner_count, sorted_view_count, last_issue_body, token)
-
-    print(issue_content)
-    repository = get_repository(repository_name, token)
-    create_issue(repository, issue_title, issue_content)
-
-
-
+        issue_content = create_issue_content(last_issue_body, token)
+        print(issue_content)
+        repository = get_repository(repository_name, token)
+        # create_issue(repository, issue_title, issue_content)

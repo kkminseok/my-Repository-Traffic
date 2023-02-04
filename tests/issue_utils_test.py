@@ -1,6 +1,6 @@
 from pytest_mock import MockerFixture
 
-from issue_utils import compare_prev_issue, create_issue_content
+from module.issue_utils import compare_prev_issue, create_issue_content
 
 
 def test_create_issue_content(cloner: list, viewer: list, last_issue: str, mocker: MockerFixture):

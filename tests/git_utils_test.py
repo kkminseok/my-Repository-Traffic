@@ -1,6 +1,6 @@
 from pytest_mock import MockerFixture
 
-from git_utils import *
+from module.git_api import *
 
 
 def test_get_all_repositories(token: str):

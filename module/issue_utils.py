@@ -1,25 +1,19 @@
-from datetime import datetime
-import pytz
-
-from git_utils import get_repository, get_repository_clone_traffic, get_repository_view_traffic
+from data_class.repositories.cloner_repositories import ClonerRepositories
+from data_class.repositories.visitor_repositories import VisitorRepositories
 
 
-def create_issue_content(cloner_data: list, view_data: list, last_issue_body: str, token: str) -> str:
+# TODO Refacotring...
+def create_issue_content(last_issue_body: str, token: str) -> str:
     # 문자열 그냥 합치면 효율성이 떨이짐.
     github_url = 'https://github.com/'
     issue_list = []
-    # 오늘까지의 총 cloner 수
-    total_cloner_sum = two_week_cloner_sum(cloner_data)
-    total_view_sum = tow_week_viewer_sum(view_data)
-
-    #오늘 unique cloner 수
-    today_unique_cloner = today_cloner(cloner_data, token)
-
-    #오늘 unique viewer 수
-    today_unique_viewer = today_viewer(view_data, token)
+    cloner_data = ClonerRepositories.instance().repositories
+    view_data = VisitorRepositories.instance().repositories
+    total_cloner_sum = ClonerRepositories.instance().cloner_sum
+    total_viewer_sum = VisitorRepositories.instance().visitor_sum
 
     # 이전 이슈와 비교
-    compare_result = compare_prev_issue(cloner_data, view_data, last_issue_body, total_cloner_sum, total_view_sum)
+    compare_result = compare_prev_issue(cloner_data, view_data, last_issue_body, total_cloner_sum, total_viewer_sum)
     prev_clone_dict = compare_result[0]
     prev_view_dict = compare_result[1]
     prev_total_clone = prev_clone_dict["today"]
@@ -31,7 +25,7 @@ def create_issue_content(cloner_data: list, view_data: list, last_issue_body: st
     issue_view_summary = '`The number of view in two weeks.` <br/> \n'
 
     issue_cloner_header = f'## Unique Cloner 😊today : {total_cloner_sum} ({today_clone_status}{prev_total_clone}) <br/> \n'
-    issue_viewer_header = f'## Unique viewer 😊today: {total_view_sum} ({today_view_status}{prev_total_view})<br/> \n'
+    issue_viewer_header = f'## Unique viewer 😊today: {total_viewer_sum} ({today_view_status}{prev_total_view})<br/> \n'
 
     issue_list.append(issue_cloner_header)
     issue_list.append(issue_clone_summary)
@@ -41,7 +35,8 @@ def create_issue_content(cloner_data: list, view_data: list, last_issue_body: st
         cloner_update = prev_clone_dict[repo_name]
         today_clone = is_today(repo_name, today_unique_cloner)
 
-        issue_list.append(f"- clone of [{repo_name}]({github_url}" + repo_name + f"): {cloner}  {cloner_update} {today_clone} \n")
+        issue_list.append(
+            f"- clone of [{repo_name}]({github_url}" + repo_name + f"): {cloner}  {cloner_update} {today_clone} \n")
 
     issue_list.append('<br/>' * 5)
     issue_list.append("\n")
@@ -53,7 +48,8 @@ def create_issue_content(cloner_data: list, view_data: list, last_issue_body: st
         repo_name, viewer = unique_view
         viewer_update = prev_view_dict[repo_name]
         today_view = is_today(repo_name, today_unique_viewer)
-        issue_list.append(f"- view of [{repo_name}]({github_url}" + repo_name + f"): {viewer} {viewer_update} {today_view}\n")
+        issue_list.append(
+            f"- view of [{repo_name}]({github_url}" + repo_name + f"): {viewer} {viewer_update} {today_view}\n")
 
     issue_list.append("If you, the creator, also visit or clone the repository daily, the results will be counted and "
                       "accumulated daily. Please be aware of this.<br/>")
@@ -68,54 +64,15 @@ def get_status(value: int) -> str:
     return "-"
 
 
-def two_week_cloner_sum(today_cloner: list) -> int:
-    clone_sum = 0
-    for today_clone, val in today_cloner:
-        clone_sum += val
-    return clone_sum
-
-
-def today_cloner(today_cloner: list, token: str) -> dict:
-    today_cloner_dict = {}
-    for repository_fullname, val in today_cloner:
-        repository_name = repository_fullname.split('/')[1]
-        repository = get_repository(repository_name, token)
-        today = datetime.now(pytz.timezone('Asia/Seoul'))
-        last_cloner = get_repository_clone_traffic(repository)['clones'][-1]
-
-        if today.month == last_cloner.timestamp.month and today.day == last_cloner.timestamp.day:
-            today_cloner_dict[repository_fullname] = last_cloner.uniques
-    return today_cloner_dict
-
-
 def is_today(repository_name: str, data: dict):
     if repository_name in data:
         return f"/ today: {data[repository_name]}"
     return ""
 
 
-def today_viewer(today_viewer: list, token: str) -> dict:
-    today_viewer_dict = {}
-    for repository_fullname, val in today_viewer:
-        repository_name = repository_fullname.split('/')[1]
-        repository = get_repository(repository_name, token)
-        today = datetime.now(pytz.timezone('Asia/Seoul'))
-        last_viewer = get_repository_view_traffic(repository)['views'][-1]
-
-        if today.month == last_viewer.timestamp.month and today.day == last_viewer.timestamp.day:
-            today_viewer_dict[repository_fullname] = last_viewer.uniques
-    return today_viewer_dict
-
-
-def tow_week_viewer_sum(today_viewer: list) -> int:
-    viewer_sum = 0
-    for today_view, val in today_viewer:
-        viewer_sum += val
-    return viewer_sum
-
-
 def compare_prev_issue(current_cloner: list, current_view: list, last_issue: str, today_cloner: int,
                        today_viewer: int) -> list:
+    print("last issue:", last_issue)
     prev_cloner = get_prev_cloner(last_issue)
     prev_viewer = get_prev_viewer(last_issue)
     cloner_compare = compare_prev_cloner(prev_cloner, current_cloner, today_cloner)
