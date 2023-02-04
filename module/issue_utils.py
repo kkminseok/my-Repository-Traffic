@@ -1,5 +1,13 @@
+from constant.constant import CLONER_TITLE
+from data_class.issue.prev_issue import PrevIssue
 from data_class.repositories.cloner_repositories import ClonerRepositories
 from data_class.repositories.visitor_repositories import VisitorRepositories
+
+
+def separate_issue(last_issue_body: str):
+    prev_issue_cloner = get_last_issue_cloner(last_issue_body)
+    print(prev_issue_cloner)
+    pass
 
 
 # TODO Refacotring...
@@ -145,3 +153,30 @@ def compare_prev_viewer(prev_viewer, current_viewer, today_viewer_count) -> dict
         compare_result[curr_repo_name] = viewer_status
     compare_result["today"] = today_viewer_count - prev_viewer["sum"]
     return compare_result
+
+
+# TODO prev_repositories 안에다가 넣기.
+def get_last_issue_cloner(last_issue_body: str) -> PrevIssue:
+    cloner_title, last_idx = get_last_issue_cloner_title(last_issue_body)
+    cloner_summary, last_idx = get_last_issue_cloner_summary(last_issue_body, last_idx)
+    cloner_body, last_idx = get_last_issue_cloner_body(last_issue_body, last_idx)
+    prev_cloner = PrevIssue(cloner_title, cloner_summary)
+    print(prev_cloner)
+
+
+def get_last_issue_cloner_title(last_issue_body: str) -> tuple:
+    cloner_title_idx = last_issue_body.find(CLONER_TITLE)
+    cloner_title_last_idx = last_issue_body.find('\n', cloner_title_idx)
+    return last_issue_body[cloner_title_idx:cloner_title_last_idx], cloner_title_last_idx
+
+
+def get_last_issue_cloner_summary(last_issue_body: str, idx: int) -> tuple:
+    cloner_summary_idx = last_issue_body.find('`', idx)
+    cloner_summary_last_idx = last_issue_body.find('\n', cloner_summary_idx)
+    return last_issue_body[cloner_summary_idx:cloner_summary_last_idx], cloner_summary_last_idx
+
+
+def get_last_issue_cloner_body(last_issue_body: str, idx: int) -> tuple:
+    cloner_body_idx = last_issue_body.find('-', idx)
+    cloner_body_last_idx = last_issue_body.find('#', cloner_body_idx)
+    return last_issue_body[cloner_body_idx:cloner_body_last_idx], cloner_body_last_idx

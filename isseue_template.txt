@@ -1,0 +1,40 @@
+// last issue
+## Unique Cloner 😊today : 51 (🔽-26) <br/>
+`The number of clones in two weeks.` <br/>
+- clone of [kkminseok/my-Repository-Traffic](https://github.com/kkminseok/my-Repository-Traffic): 17  (🔽-6) / today: 2
+- clone of [kkminseok/kkminseok.github.io](https://github.com/kkminseok/kkminseok.github.io): 6  (-) / today: 2
+- clone of [kkminseok/real-world-springboot-vue.js](https://github.com/kkminseok/real-world-springboot-vue.js): 4  (🔽-4) / today: 1
+- clone of [kkminseok/2017_Alram_project](https://github.com/kkminseok/2017_Alram_project): 3  (-)
+- clone of [kkminseok/2020_capstone_project_human_to_animal](https://github.com/kkminseok/2020_capstone_project_human_to_animal): 2  (-)
+- clone of [kkminseok/4_kyh_spring_mvc_note](https://github.com/kkminseok/4_kyh_spring_mvc_note): 2  (-)
+- clone of [kkminseok/Algorithm_solution](https://github.com/kkminseok/Algorithm_solution): 2  (🔽-1)
+- clone of [kkminseok/binance_NFT](https://github.com/kkminseok/binance_NFT): 2  (🔼1) / today: 1
+- clone of [kkminseok/JavaVersionDoc](https://github.com/kkminseok/JavaVersionDoc): 2  (🔽-1) / today: 1
+- clone of [kkminseok/Springkyh](https://github.com/kkminseok/Springkyh): 2  (-)
+- clone of [kkminseok/Spring_Cloud_Zuul_Eureka](https://github.com/kkminseok/Spring_Cloud_Zuul_Eureka): 2  (-)
+- clone of [kkminseok/2020_kotlin_deepleaning](https://github.com/kkminseok/2020_kotlin_deepleaning): 1  (-)
+- clone of [kkminseok/Book](https://github.com/kkminseok/Book): 1  (-) / today: 1
+- clone of [kkminseok/DoubleCOnline](https://github.com/kkminseok/DoubleCOnline): 1  (🔽-1)
+- clone of [kkminseok/Git_Tutorial](https://github.com/kkminseok/Git_Tutorial): 1  (-)
+- clone of [kkminseok/kkminseok](https://github.com/kkminseok/kkminseok): 1  (🔽-1)
+- clone of [kkminseok/SPA_VUE_Spring_Example](https://github.com/kkminseok/SPA_VUE_Spring_Example): 1  (-)
+- clone of [kkminseok/TIL_Interview](https://github.com/kkminseok/TIL_Interview): 1  (-)
+<br/><br/><br/><br/><br/>
+## Unique viewer 😊today: 111 (🔽-27)<br/>
+`The number of view in two weeks.` <br/>
+- view of [kkminseok/real-world-springboot-vue.js](https://github.com/kkminseok/real-world-springboot-vue.js): 74 (🔽-6)
+- view of [kkminseok/4_kyh_spring_mvc_note](https://github.com/kkminseok/4_kyh_spring_mvc_note): 9 (🔼1) / today: 1
+- view of [kkminseok/my-Repository-Traffic](https://github.com/kkminseok/my-Repository-Traffic): 7 (🔽-10) / today: 1
+- view of [kkminseok/kkminseok.github.io](https://github.com/kkminseok/kkminseok.github.io): 5 (🔽-1)
+- view of [kkminseok/Algorithm_solution](https://github.com/kkminseok/Algorithm_solution): 2 (🔽-2)
+- view of [kkminseok/Book](https://github.com/kkminseok/Book): 2 (🔽-1)
+- view of [kkminseok/Git_Tutorial](https://github.com/kkminseok/Git_Tutorial): 2 (-)
+- view of [kkminseok/JavaVersionDoc](https://github.com/kkminseok/JavaVersionDoc): 2 (-)
+- view of [kkminseok/kkminseok](https://github.com/kkminseok/kkminseok): 2 (-)
+- view of [kkminseok/2017_Alram_project](https://github.com/kkminseok/2017_Alram_project): 1 (-)
+- view of [kkminseok/binance_NFT](https://github.com/kkminseok/binance_NFT): 1 (🔽-1)
+- view of [kkminseok/DB_SQL_Review](https://github.com/kkminseok/DB_SQL_Review): 1 (🔽-1)
+- view of [kkminseok/FastapiDocCode](https://github.com/kkminseok/FastapiDocCode): 1 (🔽-1)
+- view of [kkminseok/jekyll-theme-chirpy](https://github.com/kkminseok/jekyll-theme-chirpy): 1 (-)
+- view of [kkminseok/OS_md](https://github.com/kkminseok/OS_md): 1 (-)
+If you, the creator, also visit or clone the repository daily, the results will be counted and accumulated daily. Please be aware of this.<br/>

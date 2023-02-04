@@ -1,6 +1,10 @@
 from pytest_mock import MockerFixture
 
-from module.issue_utils import compare_prev_issue, create_issue_content
+from module.issue_utils import compare_prev_issue, create_issue_content, separate_issue
+
+
+def test_separate_issue(last_issue: str):
+    separate_issue(last_issue)
 
 
 def test_create_issue_content(cloner: list, viewer: list, last_issue: str, mocker: MockerFixture):
@@ -27,6 +31,7 @@ def test_compare_prev_issue(cloner: list, viewer: list, last_issue: str, today_c
     mocker.patch("issue_utils.compare_prev_viewer", compare_prev_viewer)
     # last_issue parsing
     compare_prev_issue(cloner, viewer, last_issue, today_cloner, today_viewer)
+
 
 
 def get_prev_cloner(last_issue: str) -> dict:
@@ -99,3 +104,4 @@ def compare_prev_viewer(prev, curr, today_view) -> dict:
     # 차이계산
     compare_result["today"] = today_view - prev["sum"]
     return compare_result
+
