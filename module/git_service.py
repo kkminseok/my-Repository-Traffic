@@ -53,7 +53,8 @@ def set_all_repositories_today_cloner(token: str) -> None:
     for full_name, repository in my_repositories.items():
         git_repository = git_api.get_repository(repository.name, token)
         today = datetime.now(pytz.timezone('Asia/Seoul'))
-        last_cloner = git_api.get_repository_clone_traffic(git_repository)['clones'][-1]
+        last_cloner_info = git_api.get_repository_clone_traffic(git_repository)['clones']
+        last_cloner = last_cloner_info[-1]
 
         if today.month == last_cloner.timestamp.month and today.day == last_cloner.timestamp.day:
             repository.today_cloner = last_cloner.uniques
@@ -69,7 +70,8 @@ def set_all_repositories_today_viewer(token: str) -> None:
     for full_name, repository in my_repositories.items():
         git_repository = git_api.get_repository(repository.name, token)
         today = datetime.now(pytz.timezone('Asia/Seoul'))
-        last_visitor = git_api.get_repository_view_traffic(git_repository)['views'][-1]
+        last_visitor_info = git_api.get_repository_view_traffic(git_repository)['views']
+        last_visitor = last_visitor_info[-1]
 
         if today.month == last_visitor.timestamp.month and today.day == last_visitor.timestamp.day:
             repository.today_visitor = last_visitor.uniques

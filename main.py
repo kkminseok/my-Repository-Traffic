@@ -1,7 +1,7 @@
 from module.git_api import get_repository_issue_count, get_info_last_issue_body, get_repository
 from module.git_service import init_all_repositories, set_all_repositories_cloner, set_all_repositories_visitor, \
     set_all_repositories_today_cloner, set_all_repositories_today_viewer
-from module.issue_utils import create_issue_content
+from module.issues.issue_utils import create_issue_content, separate_issue
 from module.date import get_today
 from module.token import get_token
 
@@ -26,9 +26,9 @@ if __name__ == "__main__":
         pass
     else:
         last_issue_body = get_info_last_issue_body(repository_name, last_issue_number, token)
-        #TODO 이전 이슈에 대한 정보도 미리 파싱해 두는게 좋을 것
-
-        issue_content = create_issue_content(last_issue_body, token)
+        prev_cloner_info, prev_viewer_info = separate_issue(last_issue_body)
+        # TODO
+        issue_content = create_issue_content(prev_cloner_info, prev_viewer_info, token)
         print(issue_content)
         repository = get_repository(repository_name, token)
         # create_issue(repository, issue_title, issue_content)
