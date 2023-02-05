@@ -37,7 +37,7 @@ def set_prev_issue_viewer(prev_viewer: PrevIssue, body: str) -> PrevIssue:
             continue
         week_count = get_two_week_count(prev_repository_info)
         today_count = get_today_count(prev_repository_info)
-        prev_viewer.add_prev_repository(repository_name, week_count, today_count)
+        prev_viewer.add_prev_viewer_repository(repository_name, week_count, today_count)
     return prev_viewer
 
 
