@@ -28,11 +28,14 @@ async def viewer() -> list:
 
 @pytest_asyncio.fixture
 async def last_issue() -> str:
-    return '## Unique Cloner 😊today : 51 (🔽-26) <br/>\n'\
-            '`The number of clones in two weeks.` <br/>\n'\
-            '- clone of [kkminseok/my-Repository-Traffic](https://github.com/kkminseok/my-Repository-Traffic): 17  (🔽-6) / today: 2\n'\
-            '- clone of [kkminseok/2017_Alram_project](https://github.com/kkminseok/2017_Alram_project): 3  (-)\n'\
-            '## Unique viewer 😊today: 111 (🔽-27)<br/>\n'
+    return '## Unique Cloner 😊today : 51 (🔽-26) <br/>\n' \
+           '`The number of clones in two weeks.` <br/>\n' \
+           '- clone of [kkminseok/my-Repository-Traffic](https://github.com/kkminseok/my-Repository-Traffic): 17  (🔽-6) / today: 2\n' \
+           '- clone of [kkminseok/2017_Alram_project](https://github.com/kkminseok/2017_Alram_project): 3  (-)\n' \
+           '## Unique viewer 😊today: 111 (🔽-27)<br/>\n' \
+           '`The number of view in two weeks.` <br/>\n' \
+           '- view of [kkminseok/real-world-springboot-vue.js](https://github.com/kkminseok/real-world-springboot-vue.js): 74 (🔽-6)\n' \
+           '- view of [kkminseok/4_kyh_spring_mvc_note](https://github.com/kkminseok/4_kyh_spring_mvc_note): 9 (🔼1) / today: 1\n'
 
 
 @pytest_asyncio.fixture

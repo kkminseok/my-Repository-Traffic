@@ -1,10 +1,10 @@
 from pytest_mock import MockerFixture
 
-from module.issue_utils import compare_prev_issue, create_issue_content, separate_issue
+from module.issues.issue_utils import compare_prev_issue, create_issue_content, separate_issue
 
 
 def test_separate_issue(last_issue: str):
-    separate_issue(last_issue)
+    assert separate_issue(last_issue)
 
 
 def test_create_issue_content(cloner: list, viewer: list, last_issue: str, mocker: MockerFixture):
