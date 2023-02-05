@@ -75,4 +75,3 @@ def set_all_repositories_today_viewer(token: str) -> None:
 
         if today.month == last_visitor.timestamp.month and today.day == last_visitor.timestamp.day:
             repository.today_visitor = last_visitor.uniques
-    print("visitor:", my_repositories)

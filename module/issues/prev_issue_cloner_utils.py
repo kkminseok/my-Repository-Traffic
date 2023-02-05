@@ -38,7 +38,7 @@ def set_prev_issue_cloner(prev_cloner: PrevIssue, body: str) -> PrevIssue:
             continue
         week_count = get_two_week_count(prev_repository_info)
         today_count = get_today_count(prev_repository_info)
-        prev_cloner.add_prev_repository(repository_name, week_count, today_count)
+        prev_cloner.add_prev_cloner_repository(repository_name, week_count, today_count)
     return prev_cloner
 
 

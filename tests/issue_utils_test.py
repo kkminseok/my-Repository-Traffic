@@ -33,7 +33,6 @@ def test_compare_prev_issue(cloner: list, viewer: list, last_issue: str, today_c
     compare_prev_issue(cloner, viewer, last_issue, today_cloner, today_viewer)
 
 
-
 def get_prev_cloner(last_issue: str) -> dict:
     cloner_str = last_issue[:last_issue.find("Unique viewer")]
     prev_cloner_list = cloner_str.split('\n')
@@ -104,4 +103,3 @@ def compare_prev_viewer(prev, curr, today_view) -> dict:
     # 차이계산
     compare_result["today"] = today_view - prev["sum"]
     return compare_result
-
