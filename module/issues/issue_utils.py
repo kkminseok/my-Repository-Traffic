@@ -22,9 +22,14 @@ def create_issue_content(prev_issue_cloner: PrevIssue, prev_issue_visitor: PrevI
     total_cloner_sum: int = ClonerRepositories.instance().cloner_sum
     total_viewer_sum: int = VisitorRepositories.instance().visitor_sum
 
+    print("total_cloner_sum: ", total_cloner_sum)
+    print("total_viewer_sum: ", total_viewer_sum)
+
     # 이전 이슈와 비교
     cloner_diff = total_cloner_sum - prev_issue_cloner.title_count
+    print("cloner_diff: ", cloner_diff)
     viewer_diff = total_viewer_sum - prev_issue_visitor.title_count
+    print("viewer_diff: ", viewer_diff)
     today_clone_status = get_status(cloner_diff)
     today_view_status = get_status(viewer_diff)
 
@@ -77,6 +82,7 @@ def compare_prev_cloner(full_name: str, prev_cloner_repositories: dict, curr_clo
             compare_result.append("(-)")
         if curr_cloner_info.today_cloner != 0:
             today_cloner_diff = curr_cloner_info.today_cloner - prev_cloner_repositories[full_name].today_cloner
+            print("repo: {} curr_clone_today: {} prev_clone_today: {}".format(full_name, curr_cloner_info.today_cloner, prev_cloner_repositories[full_name].today_cloner) )
             compare_result.append(f"/ today: {curr_cloner_info.today_cloner} ")
             if today_cloner_diff > 0:
                 compare_result.append("(🔼{})".format(today_cloner_diff))
@@ -99,6 +105,10 @@ def compare_prev_viewer(full_name: str, prev_viewer_repositories: dict, curr_vie
             compare_result.append("(-)")
         if curr_viewer_info.today_visitor != 0:
             today_viewer_diff = curr_viewer_info.today_visitor - prev_viewer_repositories[full_name].today_visitor
+            print(
+                "repo: {} curr_viewer_today: {} prev_viewer_today: {}".format(full_name, curr_viewer_info.today_visitor,
+                                                                              prev_viewer_repositories[
+                                                                                  full_name].today_visitor))
             compare_result.append(f"/ today: {curr_viewer_info.today_visitor} ")
             if today_viewer_diff > 0:
                 compare_result.append("(🔼{})".format(today_viewer_diff))

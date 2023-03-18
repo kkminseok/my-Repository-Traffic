@@ -28,14 +28,21 @@ async def viewer() -> list:
 
 @pytest_asyncio.fixture
 async def last_issue() -> str:
-    return '## Unique Cloner 😊today : 51 (🔽-26) <br/>\n' \
-           '`The number of clones in two weeks.` <br/>\n' \
-           '- clone of [kkminseok/my-Repository-Traffic](https://github.com/kkminseok/my-Repository-Traffic): 17  (🔽-6) / today: 2\n' \
-           '- clone of [kkminseok/2017_Alram_project](https://github.com/kkminseok/2017_Alram_project): 3  (-)\n' \
-           '## Unique viewer 😊today: 111 (🔽-27)<br/>\n' \
-           '`The number of view in two weeks.` <br/>\n' \
-           '- view of [kkminseok/real-world-springboot-vue.js](https://github.com/kkminseok/real-world-springboot-vue.js): 74 (🔽-6)\n' \
-           '- view of [kkminseok/4_kyh_spring_mvc_note](https://github.com/kkminseok/4_kyh_spring_mvc_note): 9 (🔼1) / today: 1\n'
+    return '## Unique viewer 😊today: 90 (🔼1)<br/>\n' \
+           '`The number of view in two weeks.` <br/\n>' \
+           '- view of [kkminseok/real-world-springboot-vue.js](https://github.com/kkminseok/real-world-springboot-vue.js): 68 (🔼1)/ today: 3 (🔼1)\n' \
+           '- view of [kkminseok/kkminseok.github.io](https://github.com/kkminseok/kkminseok.github.io): 5 (-)\n' \
+           '- view of [kkminseok/4_kyh_spring_mvc_note](https://github.com/kkminseok/4_kyh_spring_mvc_note): 4 (-)\n' \
+           '- view of [kkminseok/BPM-Backend](https://github.com/kkminseok/BPM-Backend): 3 (-)\n' \
+           '- view of [kkminseok/JavaVersionDoc](https://github.com/kkminseok/JavaVersionDoc): 2 (-)\n' \
+           '- view of [kkminseok/my-Repository-Traffic](https://github.com/kkminseok/my-Repository-Traffic): 2 (-)\n' \
+           '- view of [kkminseok/2020_Ec2_openAPI_project](https://github.com/kkminseok/2020_Ec2_openAPI_project): 1 (-)\n' \
+           '- view of [kkminseok/binance_NFT](https://github.com/kkminseok/binance_NFT): 1 (-)\n' \
+           '- view of [kkminseok/DB_SQL_Review](https://github.com/kkminseok/DB_SQL_Review): 1 (-)\n' \
+           '- view of [kkminseok/DoubleCOnline](https://github.com/kkminseok/DoubleCOnline): 1 (-)\n' \
+           '- view of [kkminseok/OS_md](https://github.com/kkminseok/OS_md): 1 (-)\n' \
+           '- view of [kkminseok/realworld](https://github.com/kkminseok/realworld): 1 (-)\n' \
+           'If you, the creator, also visit or clone the repository daily, the results will be counted and accumulated daily. Please be aware of this.<br/>\n'
 
 
 @pytest_asyncio.fixture
