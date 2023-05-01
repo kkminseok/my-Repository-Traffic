@@ -4,6 +4,7 @@ import pandas as pd
 import pytz
 
 from data_class.repositories.cloner_repositories import ClonerRepositories, ClonerRepository
+from module.issues.prev_issue_viewer_utils import get_today_count
 
 
 def test_get_today_info():
@@ -27,6 +28,11 @@ def test_regrex_search():
     match = re.findall(r'(\d+)', my_traffic_data)
     if match:
         print(match)
+
+
+def test_get_today_count():
+    test_str = 'view of [kkminseok/real-world-springboot-vue.js](https://github.com/kkminseok/real-world-springboot-vue.js): 89 (🔼1)/ today: 3 '
+    get_today_count(test_str)
 
 
 def test_data_class():
