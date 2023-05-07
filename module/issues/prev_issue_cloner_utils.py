@@ -58,4 +58,5 @@ def get_today_count(line: str) -> int:
     idx = line.find(CLONER_TODAY_SEPERATOR)
     if idx == -1:
         return 0
-    return int(re.sub(r'[^0-9]', '', line[idx:line.find('\n', idx)]))
+    print("cloner prev today count : ", int(re.sub(r'[^0-9]', '', line[idx:line.find('(', idx)])))
+    return int(re.sub(r'[^0-9]', '', line[idx:line.find('(', idx)]))
