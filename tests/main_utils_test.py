@@ -30,6 +30,11 @@ def test_regrex_search():
         print(match)
 
 
+def test_bug_issue():
+    test_str = 'view of kkminseok/real-world-springboot-vue.js: 63 (🔽-26)/ today: 5 (🔼2)'
+    get_today_count(test_str)
+
+
 def test_get_today_count():
     test_str = 'view of [kkminseok/real-world-springboot-vue.js](https://github.com/kkminseok/real-world-springboot-vue.js): 89 (🔼1)/ today: 3 '
     get_today_count(test_str)

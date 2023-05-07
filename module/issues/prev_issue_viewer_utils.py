@@ -60,5 +60,6 @@ def get_today_count(line: str) -> int:
     print(idx)
     print(line[idx])
     print(line)
-    return int(re.sub(r'[^0-9]', '', line[idx:line.find('\n', idx)]))
+    print(int(re.sub(r'[^0-9]', '', line[idx:line.find('(', idx)])))
+    return int(re.sub(r'[^0-9]', '', line[idx:line.find('(', idx)]))
     # return int(re.sub(r'[^0-9]', '', line[line.find('(', idx):line.find('\n', idx)]))
